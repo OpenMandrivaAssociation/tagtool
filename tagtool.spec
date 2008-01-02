@@ -11,6 +11,7 @@ Source:		http://prdownloads.sourceforge.net/tagtool/%{name}-%{version}.tar.bz2
 URL:		http://pwp.netcabo.pt/paol/tagtool/
 License:	GPL
 Group:		Sound
+BuildRoot:	%{_tmppath}/%{name}-buildroot
 BuildRequires:	pkgconfig ImageMagick
 BuildRequires:	gtk2-devel libglade2.0-devel
 BuildRequires:	id3lib-devel libvorbis-devel libogg-devel
