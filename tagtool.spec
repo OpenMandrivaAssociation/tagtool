@@ -37,10 +37,6 @@ rm -rf $RPM_BUILD_ROOT
 %makeinstall
 
 #menu
-mkdir -p $RPM_BUILD_ROOT%{_menudir}
-cat << EOF > $RPM_BUILD_ROOT%{_menudir}/%{name}
-?package(%{name}): command="%{name}" icon="%{name}.png" needs="x11" title="TagTool" longtitle="MP3/OGG tag editor" section="Multimedia/Sound" xdg="true"
-EOF
 
 desktop-file-install --vendor="" \
   --remove-category="Application" \
@@ -72,7 +68,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %doc AUTHORS BUGS ChangeLog README NEWS THANKS TODO
 %{_bindir}/%name
-%{_menudir}/%name
 %{_datadir}/applications/*
 %{_datadir}/pixmaps/*
 %{_datadir}/%name
