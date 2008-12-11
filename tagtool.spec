@@ -12,7 +12,7 @@ URL:		http://pwp.netcabo.pt/paol/tagtool/
 License:	GPL
 Group:		Sound
 BuildRoot:	%{_tmppath}/%{name}-buildroot
-BuildRequires:	pkgconfig ImageMagick
+BuildRequires:	pkgconfig imagemagick
 BuildRequires:	gtk2-devel libglade2.0-devel
 BuildRequires:	id3lib-devel libvorbis-devel libogg-devel
 BuildRequires:	perl-XML-Parser desktop-file-utils
