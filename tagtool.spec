@@ -1,6 +1,6 @@
 %define name	tagtool
-%define version	0.12.2
-%define release %mkrel 2
+%define version	0.12.3
+%define release %mkrel 1
 
 Name: 	 	%{name}
 Summary: 	Audio file (MP3/OGG) tag editor
@@ -31,13 +31,14 @@ configurable format template.
 %build
 %configure2_5x
 %make
-										
+
 %install
 rm -rf $RPM_BUILD_ROOT
 %makeinstall
 
 #menu
 
+sed -i -e 's|False|false|g' %{buildroot}/%{_datadir}/applications/tagtool.desktop
 desktop-file-install --vendor="" \
   --remove-category="Application" \
   --add-category="GTK" \
@@ -62,7 +63,7 @@ rm -rf $RPM_BUILD_ROOT
 %post
 %update_menus
 %endif
-		
+
 %if %mdkversion < 200900
 %postun
 %clean_menus
@@ -73,9 +74,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS BUGS ChangeLog README NEWS THANKS TODO
 %{_bindir}/%name
 %{_datadir}/applications/*
-%{_datadir}/pixmaps/*
 %{_datadir}/%name
 %{_liconsdir}/%name.png
 %{_iconsdir}/%name.png
 %{_miconsdir}/%name.png
-
+%{_datadir}/icons/hicolor/*
