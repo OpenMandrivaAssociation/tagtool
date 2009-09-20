@@ -1,6 +1,6 @@
 %define name	tagtool
 %define version	0.12.3
-%define release %mkrel 1
+%define release %mkrel 2
 
 Name: 	 	%{name}
 Summary: 	Audio file (MP3/OGG) tag editor
