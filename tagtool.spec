@@ -1,17 +1,12 @@
-%define name	tagtool
-%define version	0.12.3
-%define release %mkrel 2
-
-Name: 	 	%{name}
+Name: 	 	tagtool
 Summary: 	Audio file (MP3/OGG) tag editor
-Version: 	%{version}
-Release: 	%{release}
+Version: 	0.12.3
+Release: 	3
 
 Source:		http://prdownloads.sourceforge.net/tagtool/%{name}-%{version}.tar.bz2
 URL:		http://pwp.netcabo.pt/paol/tagtool/
 License:	GPL
 Group:		Sound
-BuildRoot:	%{_tmppath}/%{name}-buildroot
 BuildRequires:	pkgconfig imagemagick
 BuildRequires:	gtk2-devel libglade2.0-devel
 BuildRequires:	id3lib-devel libvorbis-devel libogg-devel
@@ -29,11 +24,11 @@ configurable format template.
 %setup -q
 
 %build
+export LDFLAGS="-logg -lm"
 %configure2_5x
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
 %makeinstall
 
 #menu
@@ -44,30 +39,17 @@ desktop-file-install --vendor="" \
   --add-category="GTK" \
   --add-category="Audio;AudioVideoEditing" \
   --add-category="X-MandrivaLinux-Multimedia-Sound;AudioVideo" \
-  --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/*
+  --dir %{buildroot}%{_datadir}/applications %{buildroot}%{_datadir}/applications/*
 
 #icons
-mkdir -p $RPM_BUILD_ROOT/%_liconsdir
-convert -size 48x48 pixmaps/TagTool.png $RPM_BUILD_ROOT/%_liconsdir/%name.png
-mkdir -p $RPM_BUILD_ROOT/%_iconsdir
-convert -size 32x32 pixmaps/TagTool.png $RPM_BUILD_ROOT/%_iconsdir/%name.png
-mkdir -p $RPM_BUILD_ROOT/%_miconsdir
-convert -size 16x16 pixmaps/TagTool.png $RPM_BUILD_ROOT/%_miconsdir/%name.png
+mkdir -p %{buildroot}/%_liconsdir
+convert -size 48x48 pixmaps/TagTool.png %{buildroot}/%_liconsdir/%name.png
+mkdir -p %{buildroot}/%_iconsdir
+convert -size 32x32 pixmaps/TagTool.png %{buildroot}/%_iconsdir/%name.png
+mkdir -p %{buildroot}/%_miconsdir
+convert -size 16x16 pixmaps/TagTool.png %{buildroot}/%_miconsdir/%name.png
 
 %find_lang %name
-
-%clean
-rm -rf $RPM_BUILD_ROOT
-
-%if %mdkversion < 200900
-%post
-%update_menus
-%endif
-
-%if %mdkversion < 200900
-%postun
-%clean_menus
-%endif
 
 %files -f %{name}.lang
 %defattr(-,root,root)
@@ -79,3 +61,40 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/%name.png
 %{_miconsdir}/%name.png
 %{_datadir}/icons/hicolor/*
+
+
+%changelog
+* Sun Sep 20 2009 Thierry Vignaud <tvignaud@mandriva.com> 0.12.3-2mdv2010.0
++ Revision: 445346
+- rebuild
+
+* Fri Jan 23 2009 Jérôme Soyer <saispo@mandriva.org> 0.12.3-1mdv2009.1
++ Revision: 332996
+- New upstream release
+
+  + Oden Eriksson <oeriksson@mandriva.com>
+    - lowercase ImageMagick
+
+* Thu Jun 12 2008 Pixel <pixel@mandriva.com> 0.12.2-2mdv2009.0
++ Revision: 218426
+- rpm filetriggers deprecates update_menus/update_scrollkeeper/update_mime_database/update_icon_cache/update_desktop_database/post_install_gconf_schemas
+
+  + Thierry Vignaud <tvignaud@mandriva.com>
+    - drop old menu
+    - kill re-definition of %%buildroot on Pixel's request
+    - import tagtool
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+
+* Sat Sep 16 2006 Emmanuel Andry <eandry@mandriva.org> 0.12.2-2mdv2007.0
+- %%mkrel
+- xdg menu
+
+* Sun May 29 2005 Austin Acton <austin@mandriva.org> 0.12.2-1mdk
+- 0.12.2
+- source URL
+
+* Tue Feb 8 2005 Austin Acton <austin@mandrake.org> 0.12-1mdk
+- initial package
