@@ -1,7 +1,7 @@
 Name: 	 	tagtool
 Summary: 	Audio file (MP3/OGG) tag editor
 Version: 	0.12.3
-Release: 	4
+Release: 	5
 
 Source:		http://prdownloads.sourceforge.net/tagtool/%{name}-%{version}.tar.bz2
 URL:		http://pwp.netcabo.pt/paol/tagtool/
