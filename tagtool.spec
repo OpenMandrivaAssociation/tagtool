@@ -4,7 +4,7 @@ Version: 	0.12.3
 Release: 	5
 
 Source:		http://prdownloads.sourceforge.net/tagtool/%{name}-%{version}.tar.bz2
-URL:		http://pwp.netcabo.pt/paol/tagtool/
+URL:		https://pwp.netcabo.pt/paol/tagtool/
 License:	GPL
 Group:		Sound
 BuildRequires:	pkgconfig imagemagick
